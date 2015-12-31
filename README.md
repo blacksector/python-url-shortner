@@ -1,5 +1,5 @@
-# python-url-shortner
-A simple Public URL shortner written in Python Flask with MySQL database storage
+# Python URL Shortner
+A simple Public URL shortner written in Python + Flask with MySQL backend for storage
 
 ## Features
 - Built on Flask
