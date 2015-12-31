@@ -1,6 +1,21 @@
 # python-url-shortner
 A simple Public URL shortner written in Python Flask with MySQL database storage
 
+## Features
+- Built on Flask
+- Built in rate limiter
+- MySQL database storage
+- user IP tracking enable/disable
+- custom URL length
+- Uppercase URL's enable/disable
+- Create a redirect timeout if needed (Can put ads or more on a redirect loading page)
+
+## Screenshots
+Home page screenshot:
+![Home Page Python URL Shortner screenshot](/screenshots/home.png?raw=true "Home Page Python URL Shortner")
+
+
+
 ## Installation
 ### Setting up packages/modules:
 ```
