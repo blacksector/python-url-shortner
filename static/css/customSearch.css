@@ -1,0 +1,32 @@
+body {
+  padding-top: 50px;
+}
+
+h1 {
+  text-align: center;
+}
+
+.search-box {
+  margin: 0 auto;
+  width: 700px;
+}
+
+.btn-search {
+	background-color: #666;
+  color: #fff;
+  border-radius:0;
+  border-color:#666;
+}
+
+.input-search {
+	border-radius:0;
+  background-color: #eee;
+  box-shadow: none;
+  border: none;
+  border-right: 1px solid #eee;
+  width: 650px;
+}
+
+.input-search:focus {
+	box-shadow: none;
+}

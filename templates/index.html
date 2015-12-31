@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    {% if websiteTitle %}
+      <title>{{websiteTitle}} - URL Shortner</title>
+    {% else %}
+      <title>Free URL Shortner</title>
+    {% endif %}
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cosmo/bootstrap.min.css" rel="stylesheet">
+    <!-- Search Style -->
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/customSearch.css') }}">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    {% if websiteTitle %}
+      <h1>{{websiteTitle}} - URL Shortner</h1>
+    {% else %}
+      <h1>Free URL Shortner</h1>
+    {% endif %}
+
+    <br />
+    <hr />
+    <br />
+
+    <script>
+    function ValidURL(textval) {
+      var urlregex = /^(https?|ftp):\/\/([a-zA-Z0-9.-]+(:[a-zA-Z0-9.&%$-]+)*@)*((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]?)(\.(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])){3}|([a-zA-Z0-9-]+\.)*[a-zA-Z0-9-]+\.(com|edu|gov|int|mil|net|org|biz|arpa|info|name|pro|aero|coop|museum|[a-zA-Z]{2}))(:[0-9]+)*(\/($|[a-zA-Z0-9.,?'\\+&%$#=~_-]+))*$/;
+      return urlregex.test(textval);
+    }
+
+    function submitForm() {
+
+      if (ValidURL(document.getElementById("urlInput").value)) {
+        return true;
+      } else {
+        return false;
+      }
+
+    }
+
+    </script>
+
+
+    <div class="container search-box">
+      <form action="/saveURL" onsubmit="return submitForm()" method="POST">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="input-group">
+              <input id="urlInput" name="url" type="text" placeholder="Paste URL to shorten" class="form-control input-search" required>
+              <span class="input-group-btn">
+                <button class="btn btn-search" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+              </span>
+            </div><!-- /input-group -->
+          </div><!-- /.col-lg-6 -->
+        </div><!-- /.row -->
+      </form>
+
+    </div><!-- /.container -->
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  </body>
+</html>

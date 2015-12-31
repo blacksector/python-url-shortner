@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <title>Redirect Page</title>
+  <head>
+    <!-- DO NOT TOUCH THIS TAG UNLESS YOU KNOW WHAT YOU ARE DOING -->
+    <meta http-equiv="refresh" content="{{ redirectTimeout }}; url={{url}}" />
+  </head>
+  <body>
+
+    <!-- This is yours to discover and play with, enjoy with the edits below!
+    Here are ideas:
+    1. Make something like AdFly but for your own money! (Hire me to make a AdFly python implementation ;) )
+    2. Add a custom redirect using bootstrap
+    3. Maybe advertise something to the user while the page is loading?
+    -->
+
+    {% if redirectTimeout == 0 %}
+      <h1>Redirecting...</h1>
+    {% else %}
+      <h1>Please wait {{ redirectTimeout }} seconds and you will be redirected...</h1>
+    {% endif %}
+
+  </body>
+</html>
