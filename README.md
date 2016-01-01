@@ -8,6 +8,8 @@ A simple Public URL shortner written in Python + Flask with MySQL backend for st
 - user IP tracking enable/disable
 - custom URL length
 - Uppercase URL's enable/disable
+- Add hyphen and underscore to short URL? (Enable/Disable)
+- Add numbers to short URL? (Enable/Disable)
 - Create a redirect timeout if needed (Can put ads or more on a redirect loading page)
 
 ## Screenshots
@@ -27,13 +29,11 @@ pip install flask-limiter
 ### Setup app.py file
 Setup only this section below
 ```py
-#####################################
-####        MAIN CONFIG          ####
-#####################################
-letterChoices = ""
+numbers = "0123456789"
 lowerCase = "abcdefghijklmnopqrstuvwxyz"
 upperCase = lowerCase.upper()           # Will take the lowercase variable
                                         # and turn it into uppercase
+letterChoices = lowerCase
 
 # Set website limits
 limiter = Limiter(app, global_limits=["2 per second"])
@@ -50,9 +50,11 @@ urlLength = 6                           # The length of your short URLS
 enableHyphenAndUnderscore = True        # Have a "-" and "_"
                                         # (Hyphen/Dash and Underscore) in URLs?
 
+enableNumbers = True                    # Have numbers in the short URL?
+
 enableUppercase = True                  # Have upper case along with lowercase
 
-enableRedirectTimeout = 5               # Have a redirect page time out
+enableRedirectTimeout = False           # Have a redirect page time out
                                         # To use this give it a seconds timeout
                                         # To disable, set to "False"
 ```
