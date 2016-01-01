@@ -10,11 +10,6 @@ app = Flask(__name__)
 #####################################
 ####        MAIN CONFIG          ####
 #####################################
-numbers = "0123456789"
-lowerCase = "abcdefghijklmnopqrstuvwxyz"
-upperCase = lowerCase.upper()           # Will take the lowercase variable
-                                        # and turn it into uppercase
-letterChoices = lowerCase
 
 # Set website limits
 limiter = Limiter(app, global_limits=["2 per second"])
@@ -67,6 +62,13 @@ def genUrl():
 #####################################
 ####         SETUP URLS          ####
 #####################################
+
+numbers = "0123456789"
+lowerCase = "abcdefghijklmnopqrstuvwxyz"
+upperCase = lowerCase.upper()           # Will take the lowercase variable
+                                        # and turn it into uppercase
+letterChoices = lowerCase
+
 if enableHyphenAndUnderscore:
     letterChoices += "-_"
 if enableUppercase:
