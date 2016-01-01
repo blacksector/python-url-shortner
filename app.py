@@ -10,6 +10,7 @@ app = Flask(__name__)
 #####################################
 ####        MAIN CONFIG          ####
 #####################################
+numbers = "0123456789"
 lowerCase = "abcdefghijklmnopqrstuvwxyz"
 upperCase = lowerCase.upper()           # Will take the lowercase variable
                                         # and turn it into uppercase
@@ -30,6 +31,8 @@ urlLength = 6                           # The length of your short URLS
 enableHyphenAndUnderscore = True        # Have a "-" and "_"
                                         # (Hyphen/Dash and Underscore) in URLs?
 
+enableNumbers = True                    # Have numbers in the short URL?
+
 enableUppercase = True                  # Have upper case along with lowercase
 
 enableRedirectTimeout = False           # Have a redirect page time out
@@ -39,9 +42,26 @@ enableRedirectTimeout = False           # Have a redirect page time out
 
 
 
+
 ##############################################################################################################################
 #################################### DO NOT EDIT BELOW UNLESS YOU KNOW WHAT YOU ARE DOING ####################################
 ##############################################################################################################################
+
+
+
+#####################################
+####           TOOLS             ####
+#####################################
+def genUrl():
+    l = list(letterChoices)
+    final = ""
+    for x in range(urlLength):
+        final += random.choice(l)
+    return final
+
+
+
+
 
 
 #####################################
@@ -51,6 +71,8 @@ if enableHyphenAndUnderscore:
     letterChoices += "-_"
 if enableUppercase:
     letterChoices += upperCase
+if enableNumbers:
+    letterChoices += numbers
 
 
 
@@ -70,6 +92,7 @@ def home_page(url=None):
         cursor.execute("SELECT longLink FROM short WHERE shortLink='%s'" % (str(escape(url))))
         if cursor.rowcount > 0:
             foundURL = cursor.fetchone()[0]
+            db.close()
             if (enableRedirectTimeout):
                 return render_template('redirect.html', redirectTimeout=enableRedirectTimeout, url=foundURL)
             else:
@@ -81,11 +104,25 @@ def home_page(url=None):
 #####################################
 ####         SAVE PAGE           ####
 #####################################
-@app.route('/saveUrl', methods=["GET", "POST"])
+@app.route('/saveURL', methods=["GET", "POST"])
 def save_URL():
     if request.method == "POST":
-        url = request.form["url"]
-        
+        url = str(escape(request.form["url"]))
+        cont = True
+        while cont:
+            custom = str(genUrl())
+            db = MySQLdb.connect(MySQLHost, MySQLUser, MySQLPass, MySQLDB)
+            cursor = db.cursor()
+            cursor.execute("SELECT shortLink FROM short WHERE shortLink='%s'" % (str(custom)))
+            if cursor.rowcount > 0:
+                cont = True
+            else:
+                cont = False
+        cursor = db.cursor()
+        cursor.execute("INSERT INTO short (id, shortLink, longLink, time, ipAddress) VALUES (DEFAULT, '%s', '%s', '%d','%s')" % (custom, url, time.time(), str(request.remote_addr)))
+        db.commit()
+        db.close()
+        return render_template('redirect.html', redirectTimeout=0, url="/")
 
 
 

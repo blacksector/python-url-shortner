@@ -23,6 +23,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head>
+
   <body>
     {% if websiteTitle %}
       <h1>{{websiteTitle}} - URL Shortner</h1>
@@ -33,6 +34,13 @@
     <br />
     <hr />
     <br />
+
+    <div id="errorDiv">
+    </div>
+
+    <br />
+    <br />
+
 
     <script>
     function ValidURL(textval) {
