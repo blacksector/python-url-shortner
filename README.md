@@ -21,7 +21,7 @@ Home page screenshot:
 ## Installation
 ### Setting up packages/modules:
 ```
-pip install MySQL-python
+apt-get install python-mysqldb
 pip install Flask
 pip install flask-limiter
 ```
