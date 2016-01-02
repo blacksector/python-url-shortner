@@ -15,6 +15,8 @@ app = Flask(__name__)
 limiter = Limiter(app, global_limits=["2 per second"])
 
 websiteTitle = "Python"                 # Website Title
+websiteURL = "http://192.168.2.12"      # Website address, no "/" needed
+websitePort = 1313                      # Website port number to use
 
 MySQLHost = "localhost"                 # MySQL hostname
 MySQLUser = "root"                      # MySQL username
@@ -63,8 +65,10 @@ def genUrl():
 ####         SETUP URLS          ####
 #####################################
 
-numbers = "0123456789"
-lowerCase = "abcdefghijklmnopqrstuvwxyz"
+# Numbers and letters that look similar have been removed!
+
+numbers = "123456789"
+lowerCase = "abcdefghjkmnpqrstuvwxyz"
 upperCase = lowerCase.upper()           # Will take the lowercase variable
                                         # and turn it into uppercase
 letterChoices = lowerCase
@@ -124,7 +128,7 @@ def save_URL():
         cursor.execute("INSERT INTO short (id, shortLink, longLink, time, ipAddress) VALUES (DEFAULT, '%s', '%s', '%d','%s')" % (custom, url, time.time(), str(request.remote_addr)))
         db.commit()
         db.close()
-        return render_template('redirect.html', redirectTimeout=0, url="/")
+        return render_template('result.html', websiteTitle=websiteTitle, longURL=url, websiteURL=websiteURL+":"+str(websitePort), shortURL=custom)
 
 
 
@@ -142,4 +146,4 @@ def save_URL():
         
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=1313)
+    app.run(debug=True, host='0.0.0.0', port=websitePort)
