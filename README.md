@@ -1,6 +1,8 @@
 # Python URL Shortner
 A simple Public URL shortner written in Python + Flask with MySQL backend for storage
 
+![CodeShip Build](https://codeship.com/projects/f964d020-a474-0133-ec41-726ab495672b/status?branch=master, "CodeShip Build")
+
 ## Features
 - Built on Flask
 - Built in rate limiter
